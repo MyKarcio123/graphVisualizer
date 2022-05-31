@@ -174,14 +174,6 @@
 			yend=tmpy;
 		}
 	path = path.reverse();
-	graph = new Array(30);
-	for (var i = 0; i < 30; i++){
-		graph[i]=new Array(75)
-		for (var j = 0;j<75;j++){
-			//distance,visited,parrenty,parrentx
-			graph[i][j]=[Infinity,0,0,0]
-		}
-	}
 	console.log(path);
 	colorPath();
 	
