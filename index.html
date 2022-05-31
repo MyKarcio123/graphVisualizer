@@ -2,32 +2,214 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css">
+  <script>
+  class QueueElement {
+	constructor(element, priority) {
+		this.element = element;
+		this.priority = priority;
+	}
+	}
+	class PriorityQueue {
+		constructor() {
+			this.queueItems = [];
+		}
+		enqueueFunction(element, priority) {
+			let queueElement = new QueueElement(element, priority);
+			let contain = false;
+
+			for (let i = 0; i < this.queueItems.length; i++) {
+				if (this.queueItems[i].priority > queueElement.priority) {
+					this.queueItems.splice(i, 0, queueElement);
+					contain = true;
+					break;
+				}
+			}
+			if (!contain) {
+				this.queueItems.push(queueElement);
+			}
+		}
+		dequeueFunction() {
+			if (this.isPriorityQueueEmpty()) {
+				return "No elements present in Queue";
+			}
+			return this.queueItems.shift();
+		}
+		front() {
+			if (this.isPriorityQueueEmpty()) {
+				return "No elements present in Queue";
+			}
+			return this.queueItems[0];
+		}
+		rear() {
+			if (this.isPriorityQueueEmpty()) {
+				return "No elements present in Queue";
+			}
+			return this.queueItems[this.queueItems.length - 1];
+		}
+		isPriorityQueueEmpty() {
+			return this.queueItems.length === 0;
+		}
+		printPriorityQueue() {
+			let queueString = "";
+			for (let i = 0; i < this.queueItems.length; i++)
+				queueString += this.queueItems[i].element + " ";
+			return queueString;
+		}
+	}
+  </script>
 </head>
 <body>
 <div class="header">
 	<h1>hey</h1>
 </div>
 <div class="secondheader">
+	<button onclick="startAlgo()">Start</button>
 </div>
 <div class="visualizer">
 	<script>
+	path = [];
+	graph = new Array(30);
+		for (var i = 0; i < 30; i++){
+			graph[i]=new Array(75)
+			for (var j = 0;j<75;j++){
+				//distance,visited,parrenty,parrentx
+				graph[i][j]=[Infinity,0,0,0]
+			}
+		}
+	function colorPath(){
+		var len = path.length;
+		var x;
+		var y;
+		var i=0
+		function color(){
+			y=path[i][0];
+			x=path[i][1];
+			id=y+"-"+x;
+			document.getElementById(id).className = "path";
+			i=i+1;
+			if(i+1<len){
+			const myTimeout = setTimeout(color, 100);
+			}
+		}
+		color();
+	}
+	function startAlgo(){
+		let priorityQueue = new PriorityQueue();
+		var Vertex;
+		var y;
+		var x;
+		var start= document.getElementsByClassName("start")[0];
+		var startCoords = start.id.split("-");
+		graph[startCoords[0]][startCoords[1]][0]=0;
+		var end= document.getElementsByClassName("end")[0];
+		var endCoords = end.id.split("-");
+		yend=endCoords[0];
+		yend=parseInt(yend);
+		xend=endCoords[1];
+		xend=parseInt(xend);
+		ystart=startCoords[0];
+		ystart=parseInt(ystart);
+		xstart=startCoords[1]
+		xstart=parseInt(xstart);
+		priorityQueue.enqueueFunction(start.id,0)
+		while(priorityQueue.isPriorityQueueEmpty()==0){
+			Vertex = priorityQueue.dequeueFunction().element;
+			pointCoords = Vertex.split("-");
+			y=pointCoords[0];
+			y=parseInt(y);
+			x=pointCoords[1];
+			x=parseInt(x);
+			dist=graph[y][x][0];
+			if(y!=0){
+				if(graph[y-1][x][1]==0){
+					if(dist+1<graph[y-1][x][0]){
+						graph[y-1][x][0]=dist+1;
+						graph[y-1][x][2]=y;
+						graph[y-1][x][3]=x;
+						priorityQueue.enqueueFunction(y-1+"-"+x,dist+1);
+					}
+				}
+			}
+			if(y!=29){
+				if(graph[y+1][x][1]==0){
+					if(dist+1<graph[y+1][x][0]){
+						graph[y+1][x][0]=dist+1;
+						graph[y+1][x][2]=y;
+						graph[y+1][x][3]=x;
+						priorityQueue.enqueueFunction(y+1+"-"+x,dist+1);
+					}
+				}			
+			}
+			if(x!=0){
+				if(graph[y][x-1][1]==0){
+					if(dist+1<graph[y][x-1][0]){
+						graph[y][x-1][0]=dist+1;
+						graph[y][x-1][2]=y;
+						graph[y][x-1][3]=x;
+						priorityQueue.enqueueFunction(y+"-"+(x-1),dist+1);
+					}
+				}			
+			}
+			if(x!=74){
+				if(graph[y][x+1][1]==0){
+					if(dist+1<graph[y][x+1][0]){
+						graph[y][x+1][0]=dist+1;
+						graph[y][x+1][2]=y;
+						graph[y][x+1][3]=x;
+						priorityQueue.enqueueFunction(y+"-"+(x+1),dist+1);
+					}
+				}
+			}
+			graph[y][x][1]=1
+		}
+	var tmpx;
+	var tmpy;
+	path.length = 0
+	//backtracking to get path
+		while(xend!=xstart || yend!=ystart){
+			path.push([yend,xend]);
+			tmpx=graph[yend][xend][3];
+			tmpy=graph[yend][xend][2];
+			xend=tmpx;
+			yend=tmpy;
+		}
+	path = path.reverse();
+	graph = new Array(30);
+	for (var i = 0; i < 30; i++){
+		graph[i]=new Array(75)
+		for (var j = 0;j<75;j++){
+			//distance,visited,parrenty,parrentx
+			graph[i][j]=[Infinity,0,0,0]
+		}
+	}
+	console.log(path);
+	colorPath();
+	
+	}
 	var state=0
 	var prevClass="notvisited"
 	var onClick = function(id){
 		return function curried_func(e){
 			e.preventDefault();
 			if(state==0){
+				var startCoords = id.split("-");
+				var y=startCoords[0]
+				var x=startCoords[1]
 				if(document.getElementById(id).className == "start"){
 					document.getElementById(id).className = "notvisited";
+					graph[y][x][1]=0;
 					state=1
 				}else if(document.getElementById(id).className == "end"){
 					document.getElementById(id).className = "notvisited";
+					graph[y][x][1]=0;
 					state=2
 				}else if(document.getElementById(id).className == "notvisited"){
 					document.getElementById(id).className = "block";
+					graph[y][x][1]=1;
 					state=3				
 				}else if(document.getElementById(id).className == "block"){
 					document.getElementById(id).className = "notvisited";
+					graph[y][x][1]=0;
 					state=3		
 				}
 			}
@@ -59,10 +241,15 @@
 				document.getElementById(id).className = "end";
 			}
 			else if(state==3){
+				var startCoords = id.split("-");
+				var y=startCoords[0]
+				var x=startCoords[1]
 				if(document.getElementById(id).className == "notvisited"){
 					document.getElementById(id).className = "block";
+					graph[y][x][1]=1;
 				}else if(document.getElementById(id).className == "block"){
 					document.getElementById(id).className = "notvisited"
+					graph[y][x][1]=0;
 				}
 			}
 		}

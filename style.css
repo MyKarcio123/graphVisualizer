@@ -23,20 +23,23 @@ td{
 	background-image:url(start.png);
 	background-repeat:no-repeat;
 	background-size:auto;
-	background-color:red;
+	background-color:green;
 }
 .end{
 	background-image:url(start.png);
 	background-repeat:no-repeat;
 	background-size:auto;
-	background-color:yellow;	
+	background-color:purple;	
 }
 .block{
 	background-color:black;
 }
 .visited{
-	
+	background-color:blue;
 }
 .notvisited{
-	
+	background-color:white;
+}
+.path{
+	background-color:red;
 }
