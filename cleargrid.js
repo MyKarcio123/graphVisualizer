@@ -22,14 +22,12 @@ graph = new Array(30);
 	path = [];
 }
 function clearGraphWithoutWalls(){
-console.log(graph);
-for (var i = 0; i < 30; i++){
+	for (var i = 0; i < 30; i++){
 	for (var j = 0;j < 75; j++){
 		var id = i+"-"+j;
 		var cell = document.getElementById(id);
 		if(cell.className == "visited" || cell.className == "path" || cell.className == "notvisited"){
 			graph[i][j]=[Infinity,0,0,0];
-			console.log(graph[i][j]);
 			cell.className = "notvisited";
 		}
 		else if(cell.className == "end"){
@@ -39,6 +37,5 @@ for (var i = 0; i < 30; i++){
 	}
 	search = [];
 	path = [];
-	console.log(graph);
-	return graph
+	return 1;
 }
