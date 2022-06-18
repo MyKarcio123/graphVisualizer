@@ -1,45 +1,122 @@
+html {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+body {
+    width: 100%;
+    display: table-cell;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
 .header {
-	text-align: center;
+	display:flex;
+	justify-content:left;
+	position: relative;
+	align-items: center;
+	float:left;
 	background: #1abc9c;
 	color: white;
 	font-size: 30px;
-	position: top;
 	width:100%;
-	height:10%;
+	height:9%;
 	margin:0;
 }
+.secondheader {
+	display:flex;
+	justify-content:left;
+	position: relative;
+	align-items: center;
+	float:left;
+	color: black;
+	font-size: 30px;
+	width:100%;
+	height:9%;
+	margin:0;
+	z-index:-1;
+}
 table, td, th {
-  border: 1px solid black;
+  border: 0.5px solid black;
 }
 table {
 	border-collapse: collapse;
 	width:100%;
+	height:75%;
 }
 td{
-	height:20px;
-	width:20px;
+	height:3%;
+	width:1%;
 }
 .start{
 	background-image:url(start.png);
 	background-repeat:no-repeat;
-	background-size:auto;
-	background-color:green;
+	background-position:center;
+	background-size:cover;
+	background-color:rgb(0,221,0);
 }
 .end{
-	background-image:url(start.png);
+	background-image:url(flag.png);
 	background-repeat:no-repeat;
-	background-size:auto;
-	background-color:purple;	
+	background-position:center;
+	background-size:cover;
+	background-color:rgb(238,68,0);
 }
 .block{
-	background-color:black;
+	background-color:rgb(128,128,128);
 }
 .visited{
-	background-color:blue;
+	background-color:rgb(175,238,238);
 }
 .notvisited{
 	background-color:white;
 }
 .path{
+	background-color:rgb(255,255,0);
+}
+.inQueue{
+	background-color:rgb(152,251,152);
+}
+div.scrollmenu {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+div.scrollmenu a {
+	display: inline-block;
+	color: white;
+	text-align: center;
+	padding: 14px;
+	text-decoration: none;
+	margin-left:11px;
+}
+.startButton {
 	background-color:red;
+}
+.startButton:hover{
+	background-color: purple;
+	cursor: pointer;
+}
+.clearButton:hover{
+	background-color: purple;
+	cursor: pointer;
+}
+div.scrollmenu a.algomenu:hover > ul{
+	display:block;
+	margin:left;
+}
+.Algosy{
+	background: #1abc9c;
+	padding:0;
+	padding-top:1%;
+	margin:0;
+	display:none;
+	list-style-type:none;
+	position:absolute;
+}
+ul > li{
+	padding-top:5%;
+	padding-bottom:5%;
+	text-align:left;
 }
